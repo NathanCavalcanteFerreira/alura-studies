@@ -12,6 +12,7 @@ function List(){
         tarefa: 'Typescript',
         tempo: '03:00:00'
     }]
+    let test;
     return (
         <aside className="listaTarefas">
             <h2>Estudos do dia</h2>
