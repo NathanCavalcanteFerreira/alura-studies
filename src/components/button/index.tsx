@@ -1,11 +1,18 @@
 import React from "react";
 import style from "./botao.module.scss";
 
-class Button extends React.Component {
+interface Iprops{
+    children: React.ReactNode,
+    type?: "button" | "submit" | "reset" | undefined
+}
+
+class Button extends React.Component <Iprops>{
     render(){
+        const { type = "button" } = this.props;
         return(
-            <button className={style.botao}>
-                Botão
+            <button type = {type} className={style.botao} onClick={() => console.log("adicionado")}>
+                
+               {this.props.children}
             </button>
         )
     }
