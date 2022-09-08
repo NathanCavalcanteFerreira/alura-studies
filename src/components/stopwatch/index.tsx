@@ -6,6 +6,7 @@ import { Itarefa } from "../../types/tarefa";
 import { useEffect, useState } from "react";
 
 
+
 interface Props{
   selecionado : Itarefa | undefined,
   finalizarTarefa: () => void
@@ -15,6 +16,7 @@ interface Props{
 
 export default function Cronometro({selecionado, finalizarTarefa} : Props) {
   const [tempo, setTempo] = useState<number>();
+  const [counter, setCounter] = useState<any>();
   
   useEffect(() => {
    if(selecionado?.tempo){
@@ -23,13 +25,17 @@ export default function Cronometro({selecionado, finalizarTarefa} : Props) {
   }, [ selecionado ])
 
   function regressiva(contador : number = 0){
-   setTimeout(() =>{
+   setCounter(setTimeout(() =>{
     if(contador > 0){
       setTempo(contador - 1);
       return regressiva(contador - 1);
     }
     finalizarTarefa();
-   }, 1000);
+   }, 1000));
+  }
+
+  function parar(){
+    clearTimeout(counter);
   }
 
   return (
@@ -40,8 +46,15 @@ export default function Cronometro({selecionado, finalizarTarefa} : Props) {
       </div>
     <Button onClick={() => regressiva(tempo)}>
         Começar!
-      </Button>
-      <br />
+    </Button>
+    <br />
+    <br />
+
+    <Button onClick={() => parar()}>
+        Parar!
+    </Button>
+
+
     </div>
   )
 }
